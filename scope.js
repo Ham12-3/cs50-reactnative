@@ -1,3 +1,5 @@
+const { globalAgent } = require("http");
+
 console.log(namespace);
 thisIsHoisted();
 var namespace = true;
@@ -11,4 +13,4 @@ function thisIsHoisted() {
 }
 
 var y = "new variable";
-console.log(Window.y);
+console.log(global.y);
