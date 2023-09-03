@@ -28,3 +28,4 @@ const o3 = {
     number: 123,
   },
 };
+console.log(o3.address.number);
