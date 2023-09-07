@@ -37,3 +37,21 @@ export default Count;
 <AppNavigator screenProps={{ contact: "name" }} />;
 
 // this.props.navigation.navigate('Ádd contacts')
+
+
+// stackNaviagtor
+// headerTitle
+// header
+// static navigationOptions {
+//   headerTitle:
+//   headerRight:
+
+// }
+// this.props.naviagtion.goBack
+tsatic navigationOptions =({navigation })=> {
+  return {
+    headerttitle: ""
+headerRight:''
+headerLeft:''
+  }
+}
