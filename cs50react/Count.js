@@ -23,22 +23,33 @@ export default Count;
 
 // //react-navigation
 // createStackNavigator ({
-//   routt: ''
+//   route: ''
 // })
 
 // const AppNavigator = createSwitchNavigator({
 //   AddContact:AddCcontactScreen,
 //   ContactList:ContactListScreen,
 
-// })
-
+// {
+//   tabBarOPtions {
+//     activeTintColor:
+//   }
+// }
+// // tabnavigator
+// createBottomNavigstor
+// atb
+// headerTintCololr
+// // })
+// push
 // createNativeStackNavigator
 // screenProps
-<AppNavigator screenProps={{ contact: "name" }} />;
+{
+  /* <AppNavigator screenProps={{ contact: "name" }} />; */
+}
 
 // this.props.navigation.navigate('Ádd contacts')
 
-
+// this.props.navigation.getparam();
 // stackNaviagtor
 // headerTitle
 // header
@@ -48,10 +59,10 @@ export default Count;
 
 // }
 // this.props.naviagtion.goBack
-tsatic navigationOptions =({navigation })=> {
-  return {
-    headerttitle: ""
-headerRight:''
-headerLeft:''
-  }
-}
+// static navigationOptions =({navigation })=> {
+//   return {
+//     headerttitle: ""
+// headerRight:''
+// headerLeft:''
+//   }
+// }
