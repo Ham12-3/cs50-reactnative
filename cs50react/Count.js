@@ -20,3 +20,20 @@ Count.propTypes = {
 export const num = 50;
 
 export default Count;
+
+// //react-navigation
+// createStackNavigator ({
+//   routt: ''
+// })
+
+// const AppNavigator = createSwitchNavigator({
+//   AddContact:AddCcontactScreen,
+//   ContactList:ContactListScreen,
+
+// })
+
+// createNativeStackNavigator
+// screenProps
+<AppNavigator screenProps={{ contact: "name" }} />;
+
+// this.props.navigation.navigate('Ádd contacts')
