@@ -14,9 +14,30 @@ export const fetchUsers = async () => {
 Get
 Post
 */
-// LoginScreen 
+// LoginScreen
 
 import { TextInput } from "react-native";
 
-<TextInput placeholder="username" value={this.state.username} onChange={this.handleUsernameUpdate}/>
-<TextInput placeholder="password" value={this.state.password}/>
+state = {
+  username: "",
+  password: "",
+};
+handleUsernameUpdate = (username) => {
+  this.setState({ username });
+};
+handlePasswordUpdate = (password) => {
+  this.setState({ password });
+};
+
+<>
+  <TextInput
+    placeholder="username"
+    value={this.state.username}
+    onChangeText={this.handleUsernameUpdate}
+  />
+  <TextInput
+    placeholder="password"
+    value={this.state.password}
+    onChangeText={this.handlePasswordUpdate}
+  />
+</>;
