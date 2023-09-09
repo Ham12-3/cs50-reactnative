@@ -75,8 +75,13 @@ componentDidMount(() => {
     .then((results) => this.setState({ contacts: results.results }));
 });
 
+import { fetchUsers } from "./api";
 componentDidMount(() => {
-  async function fetchUser() {
-    const response = await fetch("https://randomuser.me/api?results=50&nat=us");
-  }
+  this.egtUsers();
+  fetchUsers().then((results) => this.setState({ contacts: results }));
+
+  const getUsers = async () => {
+    const results = await fetchUsers();
+    this.setState({ contacts: results });
+  };
 });
