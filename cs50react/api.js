@@ -41,3 +41,16 @@ handlePasswordUpdate = (password) => {
     onChangeText={this.handlePasswordUpdate}
   />
 </>;
+// https mehod
+fetch("http://localhost:8000", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    username: this.state.username,
+    password: this.state.password,
+  }),
+});
+
+// HTTP response code
+
+// node and express.js
