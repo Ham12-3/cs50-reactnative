@@ -12,23 +12,21 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [contacts, setContacts] = useState(null);
 
-  useEffect(() => {
-    const signUp = async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status === "granted") {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PHONE_NUMBERS],
-        });
+  const signUp = async () => {
+    const { status } = await Contacts.requestPermissionsAsync();
+    if (status === "granted") {
+      const { data } = await Contacts.getContactsAsync({
+        fields: [Contacts.Fields.PHONE_NUMBERS],
+      });
+      let n = Math.floor(Math.random() * data.length);
+      if (data.length > n) {
+        const contact = data[n];
 
-        if (data.length > 0) {
-          const contact = data[0];
-          console.log(contact);
-          setContacts(contact);
-        }
+        console.log(contact.name);
+        setContacts(contact.name);
       }
-    };
-    signUp();
-  }, []);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -49,6 +47,7 @@ export default function App() {
       <StatusBar style="auto" />
 
       <Button title="Pick a random number" onPress={() => signUp()} />
+      <Text>{contacts}</Text>
       {/* <Expo.MapView
         style={{ flex: 1 }}
         provider={Expo.MapView.PROVIDER_GOOGLE}
