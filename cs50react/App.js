@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   StyleSheet,
@@ -19,10 +19,13 @@ export default function App() {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
-  const resetAsync = async () => {
-    await video.stopAsync();
-    await video.setPositionAsync(0);
-  };
+  // const resetAsync = async () => {
+  //   await video.stopAsync();
+  //   await video.setPositionAsync(0);
+  // };
+  // const playAsync = async () => {
+  //   await video.replayAsync();
+  // };
   const setAudioModeAsync = async () => {
     await Audio.setAudioModeAsync({
       playsInSilentModeIOS: true,
@@ -31,7 +34,6 @@ export default function App() {
   };
   useEffect(() => {
     setAudioModeAsync();
-    resetAsync();
   }, []);
 
   // const [{ x, y, z }, setData] = useState({
@@ -88,21 +90,42 @@ export default function App() {
   // }, []);
   return (
     <View style={styles.container}>
-      <TouchableHighlight>
+      <TouchableHighlight
+      // onPress={() => {
+      //   playAsync();
+      // }}
+      >
         <View>
+          <Text
+            style={{
+              color: "yellow",
+            }}
+          >
+            {" "}
+            The Video
+          </Text>
           <Video
             ref={video}
-            style={styles.video}
+            style={{ width: 400, height: 400 }}
             source={{
               uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
             }}
+            isLooping
             useNativeControls
             resizeMode={ResizeMode.COVER}
-            isLooping
             onPlaybackStatusUpdate={(status) => setStatus(() => status)}
           />
         </View>
       </TouchableHighlight>
+
+      <Button
+        title={status.isPlaying ? "Pause" : "Play"}
+        onPress={() =>
+          status.isPlaying
+            ? video.current.pauseAsync()
+            : video.current.playAsync()
+        }
+      />
 
       {/* <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
@@ -154,7 +177,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
   },
