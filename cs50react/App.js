@@ -1,14 +1,34 @@
 import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 // import Count, { num } from "./Count";
 import * as Location from "expo-location";
+import * as Contacts from "expo-contacts";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 export default function App() {
   console.log("Hello");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [contacts, setContacts] = useState(null);
+
+  useEffect(() => {
+    const signUp = async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === "granted") {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PHONE_NUMBERS],
+        });
+
+        if (data.length > 0) {
+          const contact = data[0];
+          console.log(contact);
+          setContacts(contact);
+        }
+      }
+    };
+    signUp();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -27,12 +47,14 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+
+      <Button title="Pick a random number" onPress={() => signUp()} />
       {/* <Expo.MapView
         style={{ flex: 1 }}
         provider={Expo.MapView.PROVIDER_GOOGLE}
       /> */}
 
-      {location ? (
+      {/* {location ? (
         <MapView
           size={20}
           initialRegion={{
@@ -52,7 +74,7 @@ export default function App() {
         </MapView>
       ) : (
         <View />
-      )}
+      )} */}
     </View>
   );
 }

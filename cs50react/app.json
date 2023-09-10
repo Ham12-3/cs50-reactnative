@@ -16,6 +16,12 @@
     ],
     "plugins": [
       [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow cs50react to access your contacts."
+        }
+      ],
+      [
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "Allow cs50react to use your location."
