@@ -1,32 +1,58 @@
 import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
-import { Button, StyleSheet, Text, View, Image } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableHighlight,
+} from "react-native";
 // import Count, { num } from "./Count";
-import * as Location from "expo-location";
-import * as Contacts from "expo-contacts";
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
-import { Magnetometer } from "expo-sensors";
-
+// import * as Location from "expo-location";
+// import * as Contacts from "expo-contacts";
+// import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+// import { Magnetometer } from "expo-sensors";
+import { Video, ResizeMode } from "expo-av";
+import { Audio } from "expo-av";
 export default function App() {
-  const [{ x, y, z }, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  useEffect(() => {
-    Magnetometer.addListener((result) => {
-      setData(result);
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+
+  const resetAsync = async () => {
+    await video.stopAsync();
+    await video.setPositionAsync(0);
+  };
+  const setAudioModeAsync = async () => {
+    await Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+      allowsRecordingIOS: true,
     });
+  };
+  useEffect(() => {
+    setAudioModeAsync();
+    resetAsync();
   }, []);
-  let theta = "0rad";
-  if ({ x, y, z }) {
-    theta = Math.atan(-x / y);
-  } else if (y > 0) {
-    theta += Math.PI;
-  } else {
-    theta += Math.PI * 2;
-  }
-  console.log(theta);
+
+  // const [{ x, y, z }, setData] = useState({
+  //   x: 0,
+  //   y: 0,
+  //   z: 0,
+  // });
+  // useEffect(() => {
+  //   Magnetometer.addListener((result) => {
+  //     setData(result);
+  //   });
+  // }, []);
+  // let theta = "0rad";
+  // if ({ x, y, z }) {
+  //   theta = Math.atan(-x / y);
+  // } else if (y > 0) {
+  //   theta += Math.PI;
+  // } else {
+  //   theta += Math.PI * 2;
+  // }
+  // console.log(theta);
   // const [location, setLocation] = useState(null);
   // const [errorMsg, setErrorMsg] = useState(null);
   // const [contacts, setContacts] = useState(null);
@@ -62,10 +88,26 @@ export default function App() {
   // }, []);
   return (
     <View style={styles.container}>
+      <TouchableHighlight>
+        <View>
+          <Video
+            ref={video}
+            style={styles.video}
+            source={{
+              uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+            }}
+            useNativeControls
+            resizeMode={ResizeMode.COVER}
+            isLooping
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+          />
+        </View>
+      </TouchableHighlight>
+
       {/* <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
       <Text>{JSON.stringify(theta)}</Text> */}
-      <Image
+      {/* <Image
         source={require("./images/compass-needle.png")}
         style={{
           height: 420,
@@ -75,7 +117,7 @@ export default function App() {
           justifyContent: "center",
           transform: [{ rotate: theta.toString() + "rad" }],
         }}
-      />
+      /> */}
 
       {/* <Button title="Pick a random number" onPress={() => signUp()} />
       <Text>{contacts}</Text> */}
