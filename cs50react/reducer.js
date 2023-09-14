@@ -19,7 +19,8 @@ class Store {
 }
 
 const store = new Store(reducer);
-store.dispatch({ bar: "bar" });
-store.dispatch({ baz: "baz" });
-store.dispatch({ foo: "foo" });
+// store.dispatch({ bar: "bar" });
+// store.dispatch({ baz: "baz" });
+// store.dispatch({ foo: "foo" });
+store.dispatch({ type: "UPDATE_USER", payload: { foo: "foo" } });
 console.log(store.getState());
