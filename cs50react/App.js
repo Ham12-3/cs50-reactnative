@@ -17,7 +17,7 @@ import { Video, ResizeMode } from "expo-av";
 import { Audio } from "expo-av";
 export default function App() {
   const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
+  const [status, setStatus] = useState({});
 
   // const resetAsync = async () => {
   //   await video.stopAsync();
@@ -182,3 +182,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+// REDUX
+// ACTION => REDUCER => UPDATE STORE
