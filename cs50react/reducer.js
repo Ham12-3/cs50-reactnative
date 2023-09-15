@@ -24,3 +24,5 @@ const store = new Store(reducer);
 // store.dispatch({ foo: "foo" });
 store.dispatch({ type: "UPDATE_USER", payload: { foo: "foo" } });
 console.log(store.getState());
+
+//Provider neede for binding . <Provider store ={store}></Provider>
