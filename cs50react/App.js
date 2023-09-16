@@ -185,3 +185,5 @@ const styles = StyleSheet.create({
 
 // REDUX
 // ACTION => REDUCER => UPDATE STORE
+
+const logIn = (dispatch) => {};
